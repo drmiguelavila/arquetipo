@@ -220,75 +220,226 @@ function getCombNote(a1,a2){
     "La combinación de "+ARCHETYPES[a1].name+" y "+ARCHETYPES[a2].name+" crea una marca con dimensiones complementarias. El primero define tu esencia, el segundo añade el matiz que te hace único e irrepetible.";
 }
 
+// ============================================
+// BANCO DE 36 PREGUNTAS — distribución validada matemáticamente
+// Cada pregunta tiene UNA opción fuerte (peso 3) y tres opciones débiles (peso 1)
+// Cada uno de los 12 arquetipos aparece como opción fuerte EXACTAMENTE 3 veces
+// ============================================
+
 const QUESTIONS=[
-  {category:"Motivación central",text:"¿Qué te impulsa más profundamente en tu trabajo?",options:[
-    {text:"Ayudar a otros a crecer, protegerlos y estar bien",scores:{cuidador:3,inocente:1}},
-    {text:"Crear algo nuevo que no existía antes y dejar huella",scores:{creador:3,mago:1}},
-    {text:"Construir estructuras que perduren y dar orden al caos",scores:{rey:3,sabio:1}},
-    {text:"Descubrir nuevas perspectivas y vivir con autenticidad total",scores:{explorador:3,bufon:1}}]},
-  {category:"Estilo de liderazgo",text:"Cuando lideras un equipo, tu instinto natural es…",options:[
-    {text:"Escuchar primero, asegurarme de que todos estén bien",scores:{cuidador:3,comun:1}},
-    {text:"Proponer ideas disruptivas y empujar los límites",scores:{creador:3,rebelde:1}},
-    {text:"Establecer dirección clara y asumir la responsabilidad total",scores:{rey:3,heroe:1}},
-    {text:"Inspirar con visión y crear un ambiente de posibilidad",scores:{mago:3,explorador:1}}]},
-  {category:"Miedo profundo",text:"¿Cuál de estos escenarios te perturba más?",options:[
-    {text:"Ver que alguien sufre y no poder hacer nada para ayudarlo",scores:{cuidador:3,inocente:1}},
-    {text:"Quedarme estancado, sin poder crear ni innovar",scores:{creador:3,explorador:1}},
-    {text:"Perder el control, la autoridad o el respeto que he construido",scores:{rey:3,heroe:1}},
-    {text:"Descubrir que lo que construí es superficial o sin significado real",scores:{sabio:3,mago:1}}]},
-  {category:"Promesa de valor",text:"¿Cuál es tu promesa más genuina a tus clientes?",options:[
-    {text:"Que estarán en buenas manos: cuidados, protegidos, acompañados",scores:{cuidador:3,comun:1}},
-    {text:"Que algo en ellos habrá cambiado para siempre",scores:{mago:3,heroe:1}},
-    {text:"Que tendrán claridad, estructura y resultados concretos",scores:{rey:3,sabio:1}},
-    {text:"Que explorarán posibilidades que nunca habían imaginado",scores:{creador:3,explorador:1}}]},
-  {category:"Comunicación de marca",text:"¿Cómo te sientes más cómodo comunicando tu valor?",options:[
-    {text:"Compartiendo historias reales de personas que he transformado",scores:{cuidador:3,heroe:1}},
-    {text:"Mostrando lo que he creado: libros, métodos, ideas originales",scores:{creador:3,sabio:1}},
-    {text:"Proyectando autoridad, trayectoria y resultados demostrados",scores:{rey:3,heroe:1}},
-    {text:"Articulando mi visión del futuro con convicción y pasión",scores:{mago:3,explorador:1}}]},
-  {category:"Relación con clientes",text:"¿Cómo describes tu relación ideal con quienes trabajan contigo?",options:[
-    {text:"Como un mentor que acompaña con calidez genuina",scores:{cuidador:3,sabio:1}},
-    {text:"Como un socio que co-crea soluciones innovadoras",scores:{creador:3,comun:1}},
-    {text:"Como su referente de autoridad y confianza total",scores:{rey:3,sabio:1}},
-    {text:"Como un catalizador que despierta su mayor potencial",scores:{mago:3,heroe:1}}]},
-  {category:"Criterio de decisión",text:"Ante una decisión compleja, ¿qué pesa más en tu razonamiento?",options:[
-    {text:"El impacto humano: cómo afectará a las personas involucradas",scores:{cuidador:3,comun:1}},
-    {text:"La originalidad de la solución y su potencial transformador",scores:{creador:3,mago:1}},
-    {text:"Que sea la decisión correcta y sostenible a largo plazo",scores:{rey:3,sabio:1}},
-    {text:"Que genere el mayor aprendizaje y crecimiento posible",scores:{explorador:3,sabio:1}}]},
-  {category:"Diferenciación",text:"¿En qué aspecto sientes que eres genuinamente diferente?",options:[
-    {text:"En la profundidad con la que me importa el bienestar de otros",scores:{cuidador:3,inocente:1}},
-    {text:"En mi capacidad de ver y crear lo que otros no imaginan",scores:{creador:3,mago:1}},
-    {text:"En la fortaleza de mi carácter y la claridad de mi visión de liderazgo",scores:{rey:3,heroe:1}},
-    {text:"En el rigor de mi conocimiento y la profundidad de mi análisis",scores:{sabio:3,rey:1}}]},
-  {category:"Audiencia ideal",text:"¿Con quién conectas más naturalmente?",options:[
-    {text:"Con personas en momentos de vulnerabilidad que buscan apoyo",scores:{cuidador:3,comun:1}},
-    {text:"Con mentes inquietas que quieren crear e innovar",scores:{creador:3,rebelde:1}},
-    {text:"Con líderes y empresarios que buscan resultados de alto impacto",scores:{rey:3,heroe:1}},
-    {text:"Con personas curiosas que quieren entender la profundidad de las cosas",scores:{sabio:3,explorador:1}}]},
-  {category:"Contenido preferido",text:"¿Qué tipo de contenido disfrutas más crear?",options:[
-    {text:"Historias emotivas e inspiradoras de transformación humana",scores:{cuidador:2,mago:2}},
-    {text:"Análisis profundos, investigación y perspectivas no convencionales",scores:{sabio:3,creador:1}},
-    {text:"Frameworks, metodologías y sistemas prácticos aplicables",scores:{rey:2,sabio:2}},
-    {text:"Ideas disruptivas, innovación y visiones del futuro",scores:{creador:2,mago:2}}]},
-  {category:"Legado",text:"¿Qué quieres que digan de ti en 20 años?",options:[
-    {text:"Que cambió la vida de miles de personas con generosidad y amor",scores:{cuidador:3,inocente:1}},
-    {text:"Que creó algo que ningún otro había imaginado antes",scores:{creador:3,mago:1}},
-    {text:"Que construyó instituciones y sistemas que perduran en el tiempo",scores:{rey:3,sabio:1}},
-    {text:"Que combinó humanismo y tecnología para transformar su industria",scores:{mago:2,creador:2}}]},
-  {category:"Actitud ante el cambio",text:"Cuando el mundo a tu alrededor cambia radicalmente, tu primera reacción es…",options:[
-    {text:"Asegurarme de que las personas a mi alrededor estén bien y orientadas",scores:{cuidador:3,rey:1}},
-    {text:"Explorar las nuevas posibilidades que ese cambio abre",scores:{explorador:3,creador:1}},
-    {text:"Analizar el cambio en profundidad antes de actuar",scores:{sabio:3,rey:1}},
-    {text:"Liderar la adaptación con decisión y claridad para mi equipo",scores:{rey:2,heroe:2}}]},
-  {category:"Sentido del humor",text:"¿Qué papel juega el humor en tu forma de comunicar?",options:[
-    {text:"Lo uso para conectar y quitarle peso a lo cotidiano",scores:{bufon:3,comun:1}},
-    {text:"Prefiero la seriedad y la profundidad sobre la ligereza",scores:{sabio:2,rey:1}},
-    {text:"Uso el humor como forma de provocar y cuestionar",scores:{rebelde:2,bufon:1}},
-    {text:"Casi no lo uso, prefiero la calidez genuina",scores:{cuidador:2,inocente:1}}]},
   {category:"Atracción y deseo",text:"¿Cómo describes tu forma de atraer a tu audiencia?",options:[
-    {text:"A través de la calidez y la cercanía genuina",scores:{cuidador:2,comun:2}},
-    {text:"A través de la sofisticación y el deseo aspiracional",scores:{amante:3,rey:1}},
-    {text:"A través de la innovación y la sorpresa constante",scores:{creador:2,mago:2}},
-    {text:"A través de la autoridad y los resultados comprobados",scores:{rey:2,heroe:2}}]}
+    {text:"A través de la sofisticación y el deseo aspiracional",scores:{amante:3}},
+    {text:"A través de la cercanía y la pertenencia genuina",scores:{comun:1}},
+    {text:"A través de la disciplina y los resultados demostrados",scores:{heroe:1}},
+    {text:"A través de la autoridad y el prestigio",scores:{rey:1}}]},
+
+  {category:"Honestidad personal",text:"¿Qué valor defiendes con más firmeza?",options:[
+    {text:"La honestidad simple, sin segundas intenciones",scores:{inocente:3}},
+    {text:"La excelencia y el respeto que se gana con autoridad",scores:{rey:1}},
+    {text:"La superación constante de mis propios límites",scores:{heroe:1}},
+    {text:"El cuestionamiento de lo que no tiene sentido",scores:{rebelde:1}}]},
+
+  {category:"Motivación creativa",text:"¿Qué te impulsa más profundamente en tu trabajo?",options:[
+    {text:"Crear algo nuevo que no existía antes y dejar huella",scores:{creador:3}},
+    {text:"Que la gente se sienta acompañada y comprendida",scores:{comun:1}},
+    {text:"Demostrar que el esfuerzo sostenido da resultados",scores:{heroe:1}},
+    {text:"Volver simples las cosas complicadas",scores:{inocente:1}}]},
+
+  {category:"Transformación",text:"¿Qué te haría sentir que tu trabajo realmente importó?",options:[
+    {text:"Que alguien dijo: 'me cambió la vida' gracias a mí",scores:{mago:3}},
+    {text:"Que mi disciplina inspiró a otros a no rendirse",scores:{heroe:1}},
+    {text:"Que abrí un camino que nadie había explorado",scores:{explorador:1}},
+    {text:"Que generé una experiencia inolvidable y sensorial",scores:{amante:1}}]},
+
+  {category:"Visión de futuro",text:"Cuando imaginas el futuro de tu marca, ¿qué ves?",options:[
+    {text:"Un mundo transformado por ideas que parecían imposibles",scores:{mago:3}},
+    {text:"Personas más libres, viviendo con mayor coraje",scores:{rebelde:1}},
+    {text:"Experiencias que conectan profundamente con el deseo humano",scores:{amante:1}},
+    {text:"Nuevos territorios descubiertos que nadie había explorado",scores:{explorador:1}}]},
+
+  {category:"Toma de decisiones bajo presión",text:"Frente a una crisis en tu equipo, lo primero que haces es…",options:[
+    {text:"Actuar con determinación, sin esperar consenso",scores:{heroe:3}},
+    {text:"Calmar los ánimos y proteger a las personas afectadas",scores:{cuidador:1}},
+    {text:"Buscar consejo de quien tiene más experiencia",scores:{comun:1}},
+    {text:"Reformular el problema desde una perspectiva inesperada",scores:{mago:1}}]},
+
+  {category:"Forma de hacer reír",text:"¿Qué papel juega el humor en tu forma de comunicar?",options:[
+    {text:"Lo uso para conectar y quitarle peso a lo cotidiano",scores:{bufon:3}},
+    {text:"Lo uso ocasionalmente, para hacer sentir cómoda a la gente",scores:{comun:1}},
+    {text:"Prefiero la calidez genuina antes que el chiste",scores:{cuidador:1}},
+    {text:"Lo uso con filo, casi como provocación",scores:{explorador:1}}]},
+
+  {category:"Sentido de autoridad",text:"¿Qué te haría sentir más realizado profesionalmente?",options:[
+    {text:"Ser reconocido como la máxima autoridad en mi campo",scores:{rey:3}},
+    {text:"Que mi trabajo inspire a otros a superarse",scores:{heroe:1}},
+    {text:"Que la gente confíe en mí sin necesidad de pedirlo",scores:{comun:1}},
+    {text:"Haber cuestionado y cambiado las reglas del juego",scores:{rebelde:1}}]},
+
+  {category:"Origen del conocimiento",text:"¿De dónde nace tu energía para trabajar?",options:[
+    {text:"De entender profundamente cómo funcionan las cosas",scores:{sabio:3}},
+    {text:"De transformar ideas abstractas en algo tangible",scores:{mago:1}},
+    {text:"De crear objetos o métodos que perduran en el tiempo",scores:{creador:1}},
+    {text:"De volver simple lo que parecía complicado",scores:{inocente:1}}]},
+
+  {category:"Pureza de intención",text:"¿Qué te resulta más difícil de aceptar?",options:[
+    {text:"Que me vean como deshonesto o de mala fe",scores:{inocente:3}},
+    {text:"Que mi autoridad sea cuestionada sin razón",scores:{rey:1}},
+    {text:"Que mi esfuerzo pase desapercibido",scores:{heroe:1}},
+    {text:"Que mi curiosidad se apague con la rutina",scores:{explorador:1}}]},
+
+  {category:"Relación con las reglas",text:"¿Cómo te relacionas con las reglas y la autoridad establecida?",options:[
+    {text:"Las cuestiono activamente si no tienen sentido para mí",scores:{rebelde:3}},
+    {text:"Las uso a mi favor para crear algo nuevo dentro de ellas",scores:{amante:1}},
+    {text:"Las disfruto romper cuando sé que puedo hacerlo reír a otros",scores:{bufon:1}},
+    {text:"Las acepto si vienen de alguien cercano y confiable",scores:{comun:1}}]},
+
+  {category:"Materialización de ideas",text:"En el fondo, ¿qué le das realmente a tus clientes?",options:[
+    {text:"Algo tangible y duradero a partir de una idea abstracta",scores:{creador:3}},
+    {text:"Resultados concretos gracias a mi esfuerzo y disciplina",scores:{heroe:1}},
+    {text:"La sensación honesta de que todo va a estar bien",scores:{inocente:1}},
+    {text:"Una experiencia sensorial que se queda en la memoria",scores:{amante:1}}]},
+
+  {category:"Innovación con propósito",text:"¿Qué hace que la gente vuelva a trabajar contigo?",options:[
+    {text:"Que siempre tengo una idea que nadie más había pensado",scores:{creador:3}},
+    {text:"Que insisto hasta romper estructuras que no funcionan",scores:{rebelde:1}},
+    {text:"Que descubro caminos que otros no se atrevían a explorar",scores:{explorador:1}},
+    {text:"Que pienso con rigor antes de actuar",scores:{sabio:1}}]},
+
+  {category:"Inspiración por ejemplo",text:"¿Cómo prefieres motivar a otros?",options:[
+    {text:"Con ejemplo personal de disciplina y esfuerzo sostenido",scores:{heroe:3}},
+    {text:"Con cercanía genuina, como uno más del equipo",scores:{comun:1}},
+    {text:"Con visión transformadora del futuro",scores:{mago:1}},
+    {text:"Con experiencias memorables que despiertan deseo",scores:{amante:1}}]},
+
+  {category:"Lealtad a la simplicidad",text:"¿Qué quieres que digan de ti en 20 años?",options:[
+    {text:"Que mantuvo su honestidad e integridad sin importar el costo",scores:{inocente:3}},
+    {text:"Que generó momentos de pura magia y asombro",scores:{amante:1}},
+    {text:"Que rompió moldes que parecían intocables",scores:{bufon:1}},
+    {text:"Que cuestionó lo establecido sin miedo",scores:{rebelde:1}}]},
+
+  {category:"Deseo y exclusividad",text:"¿Cómo te gustaría que te describiera tu audiencia ideal?",options:[
+    {text:"Magnético, sofisticado, alguien que despierta deseo genuino",scores:{amante:3}},
+    {text:"Visionario, capaz de crear algo nuevo",scores:{creador:1}},
+    {text:"Autoritario y confiable, alguien en quien apoyarse",scores:{rey:1}},
+    {text:"Curioso, siempre explorando algo distinto",scores:{explorador:1}}]},
+
+  {category:"Pertenencia y cercanía",text:"¿Qué tipo de vínculo buscas crear con tu audiencia?",options:[
+    {text:"Uno de hermandad, como si fuéramos del mismo lugar",scores:{comun:3}},
+    {text:"Uno cálido y protector, como una figura de apoyo",scores:{cuidador:1}},
+    {text:"Uno de respeto profundo por mi trayectoria",scores:{rey:1}},
+    {text:"Uno de complicidad y deseo compartido",scores:{amante:1}}]},
+
+  {category:"Lujo y aspiración",text:"¿Qué estética representa mejor tu marca?",options:[
+    {text:"Elegante y envolvente, con un aire de misterio",scores:{amante:3}},
+    {text:"Limpia y estructurada, transmite control absoluto",scores:{rey:1}},
+    {text:"Cálida y simple, sin pretensiones",scores:{comun:1}},
+    {text:"Profunda y reflexiva, invita a pensar",scores:{sabio:1}}]},
+
+  {category:"Protección y servicio",text:"¿Cuál es tu promesa más genuina a tus clientes?",options:[
+    {text:"Que estarán en buenas manos: cuidados, protegidos, acompañados",scores:{cuidador:3}},
+    {text:"Que reirán y disfrutarán el proceso conmigo",scores:{bufon:1}},
+    {text:"Que su confianza en mí estará bien depositada",scores:{inocente:1}},
+    {text:"Que lograrán resultados medibles y concretos",scores:{heroe:1}}]},
+
+  {category:"Liderazgo con autoridad",text:"Cuando lideras un equipo, tu instinto natural es…",options:[
+    {text:"Establecer dirección clara y asumir la responsabilidad total",scores:{rey:3}},
+    {text:"Analizar fríamente antes de tomar cualquier decisión",scores:{sabio:1}},
+    {text:"Confiar primero en mi instinto y experiencia",scores:{inocente:1}},
+    {text:"Cuestionar la forma tradicional de liderar",scores:{rebelde:1}}]},
+
+  {category:"Búsqueda de horizontes",text:"¿Qué te impulsa a seguir adelante cuando todo se siente igual?",options:[
+    {text:"La posibilidad de descubrir algo completamente nuevo",scores:{explorador:3}},
+    {text:"La necesidad de respetar reglas que dan estabilidad",scores:{rey:1}},
+    {text:"El deseo de romper con lo predecible",scores:{rebelde:1}},
+    {text:"La promesa de una experiencia distinta a todo lo demás",scores:{amante:1}}]},
+
+  {category:"Profundidad analítica",text:"¿Cómo te sientes más cómodo comunicando tu valor?",options:[
+    {text:"Mostrando análisis profundo y perspectivas no convencionales",scores:{sabio:3}},
+    {text:"Proyectando autoridad y resultados demostrados",scores:{rey:1}},
+    {text:"Articulando una visión transformadora con pasión",scores:{mago:1}},
+    {text:"Compartiendo historias honestas, sin filtros",scores:{inocente:1}}]},
+
+  {category:"Resiliencia ante la adversidad",text:"¿Cuál de estos escenarios te perturba más?",options:[
+    {text:"No poder proteger a quienes dependen de mí",scores:{cuidador:3}},
+    {text:"Quedarme sin opciones de hermandad o pertenencia",scores:{comun:1}},
+    {text:"No poder superar un desafío que me propuse",scores:{heroe:1}},
+    {text:"Perder la posibilidad de seguir explorando",scores:{explorador:1}}]},
+
+  {category:"Sentido de comunidad",text:"¿Qué tipo de impacto te resulta más satisfactorio?",options:[
+    {text:"Uno masivo y accesible, que llegue a cualquiera",scores:{comun:3}},
+    {text:"Uno que materialice ideas que antes solo existían en mi mente",scores:{creador:1}},
+    {text:"Uno que proteja a quienes más lo necesitan",scores:{cuidador:1}},
+    {text:"Uno que despierte transformación profunda en pocas personas",scores:{mago:1}}]},
+
+  {category:"Coraje y revolución",text:"¿Por qué te gustaría ser recordado?",options:[
+    {text:"Por haber roto moldes que parecían intocables",scores:{rebelde:3}},
+    {text:"Por hacer reír y aligerar la vida de la gente",scores:{bufon:1}},
+    {text:"Por mi cercanía genuina con quienes confiaron en mí",scores:{comun:1}},
+    {text:"Por proteger a quienes más lo necesitaban",scores:{cuidador:1}}]},
+
+  {category:"Curiosidad sin límites",text:"¿Qué actividad te recarga más?",options:[
+    {text:"Descubrir territorios o ideas completamente nuevas",scores:{explorador:3}},
+    {text:"Reírme y conectar genuinamente con otros",scores:{bufon:1}},
+    {text:"Imaginar y dar forma a mundos transformadores",scores:{mago:1}},
+    {text:"Cuestionar y desafiar lo que ya está establecido",scores:{rebelde:1}}]},
+
+  {category:"Cercanía sin pretensiones",text:"¿Cómo te gustaría que se sintiera alguien al trabajar contigo?",options:[
+    {text:"Como si hablara con un igual, sin distancia ni pretensión",scores:{comun:3}},
+    {text:"Como si hubiera materializado algo que antes solo imaginaba",scores:{creador:1}},
+    {text:"Como si hubiera reído más de lo que esperaba",scores:{bufon:1}},
+    {text:"Como si hubiera vivido una experiencia transformadora",scores:{mago:1}}]},
+
+  {category:"Estatus y exclusividad",text:"Para ti, el éxito se parece más a…",options:[
+    {text:"Una posición de autoridad y prestigio reconocido",scores:{rey:3}},
+    {text:"Un territorio nuevo que pocos se atrevieron a explorar",scores:{explorador:1}},
+    {text:"Un cuidado constante de quienes dependen de mí",scores:{cuidador:1}},
+    {text:"Una obra original que nadie más pudo haber creado",scores:{creador:1}}]},
+
+  {category:"Espontaneidad genuina",text:"¿Qué te haría sentir que cumpliste tu propósito?",options:[
+    {text:"Haber hecho reír y disfrutar a quienes me rodean",scores:{bufon:3}},
+    {text:"Haber roto reglas que limitaban a otros",scores:{rebelde:1}},
+    {text:"Haber materializado ideas que nadie más concibió",scores:{creador:1}},
+    {text:"Haber transformado vidas con momentos de magia",scores:{mago:1}}]},
+
+  {category:"Transformación tangible",text:"¿Qué te impulsa a seguir innovando?",options:[
+    {text:"La posibilidad de transformar lo ordinario en extraordinario",scores:{mago:3}},
+    {text:"El cuidado genuino que siento por quienes me rodean",scores:{cuidador:1}},
+    {text:"El deseo de crear experiencias sensoriales únicas",scores:{amante:1}},
+    {text:"La materialización de ideas en algo tangible y duradero",scores:{creador:1}}]},
+
+  {category:"Sabiduría aplicada",text:"¿Qué tipo de contenido disfrutas más crear?",options:[
+    {text:"Análisis profundos que cambian la forma de pensar",scores:{sabio:3}},
+    {text:"Exploraciones de territorios o temas inexplorados",scores:{explorador:1}},
+    {text:"Contenido cercano y accesible para cualquiera",scores:{comun:1}},
+    {text:"Historias de superación y disciplina",scores:{heroe:1}}]},
+
+  {category:"Cuestionamiento del sistema",text:"Cuando algo no sale como planeaste, ¿qué haces?",options:[
+    {text:"Insisto en cuestionar por qué el sistema falló",scores:{rebelde:3}},
+    {text:"Busco el lado divertido o irónico de la situación",scores:{bufon:1}},
+    {text:"Acepto el resultado, confiando en que todo tiene sentido",scores:{inocente:1}},
+    {text:"Pido ayuda y reconstruyo en comunidad",scores:{comun:1}}]},
+
+  {category:"Disciplina y superación",text:"¿Qué cualidad valoras más en ti mismo?",options:[
+    {text:"Mi capacidad de disciplina y superación constante",scores:{heroe:3}},
+    {text:"Mi profundidad de análisis y reflexión",scores:{sabio:1}},
+    {text:"Mi originalidad para crear cosas que perduran",scores:{creador:1}},
+    {text:"Mi honestidad incluso cuando es incómoda",scores:{inocente:1}}]},
+
+  {category:"Aventura como estilo de vida",text:"¿Qué te haría sentir verdaderamente libre?",options:[
+    {text:"Vivir explorando sin ataduras ni rutinas fijas",scores:{explorador:3}},
+    {text:"Transformar mi entorno con ideas que parecían imposibles",scores:{mago:1}},
+    {text:"Crear experiencias sensoriales memorables",scores:{amante:1}},
+    {text:"Materializar visiones en algo concreto y duradero",scores:{creador:1}}]},
+
+  {category:"Cuidado como vocación",text:"¿Qué situación te llena más de sentido?",options:[
+    {text:"Cuidar de alguien que realmente lo necesita",scores:{cuidador:3}},
+    {text:"Crear algo original que perdura en el tiempo",scores:{creador:1}},
+    {text:"Hacer reír a alguien que estaba pasando un mal día",scores:{bufon:1}},
+    {text:"Despertar deseo y conexión profunda en otros",scores:{amante:1}}]},
+
+  {category:"Ligereza compartida",text:"¿Cómo prefieres que la gente te recuerde tras trabajar contigo?",options:[
+    {text:"Como alguien que les hizo reír y disfrutar el camino",scores:{bufon:3}},
+    {text:"Como alguien que exploró territorios nuevos junto a ellos",scores:{explorador:1}},
+    {text:"Como alguien genuino, sin pretensiones",scores:{inocente:1}},
+    {text:"Como alguien cercano, casi de la familia",scores:{comun:1}}]}
 ];

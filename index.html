@@ -20,11 +20,11 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 #progress-track{position:fixed;top:0;left:0;right:0;height:3px;background:var(--surface);z-index:101}
 #progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;transition:width 0.4s ease;z-index:102;box-shadow:0 0 12px var(--purple)}
 
-#header{position:fixed;top:3px;left:0;right:0;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;z-index:50}
-#logo{height:38px;width:auto;display:block}
+#header{position:fixed;top:3px;left:0;right:0;padding:24px 48px;display:flex;align-items:center;justify-content:space-between;z-index:50}
+#logo{height:88px;width:auto;display:block}
 #counter{font-size:11px;color:var(--purple-soft);letter-spacing:0.08em;font-weight:500;opacity:0;transition:opacity 0.4s}
 
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 48px 60px;opacity:0;pointer-events:none;transition:opacity 0.5s ease}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:160px 48px 60px;opacity:0;pointer-events:none;transition:opacity 0.5s ease}
 .screen.active{opacity:1;pointer-events:all}
 
 #intro .eyebrow{font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:32px;text-align:center}
@@ -55,7 +55,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .option-btn.selected{border-color:var(--purple);background:var(--purple-dim)}
 .option-btn.selected::before{transform:scaleY(1)}
 
-#result-screen{overflow-y:auto;overflow-x:hidden;padding-top:90px;align-items:flex-start;justify-content:flex-start}
+#result-screen{overflow-y:auto;overflow-x:hidden;padding-top:150px;align-items:flex-start;justify-content:flex-start}
 #result-tide{position:fixed;bottom:0;left:0;right:0;height:0%;transition:height 1.4s cubic-bezier(0.16,1,0.3,1);z-index:0;opacity:0.09;pointer-events:none}
 #result-inner{position:relative;z-index:1;max-width:680px;width:100%;margin:0 auto;padding:20px 0 80px}
 
@@ -117,12 +117,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 
 @media(max-width:640px){
   #header{padding:18px 22px}
-  .screen{padding:80px 22px 40px}
+  .screen{padding:130px 22px 40px}
   .r-grid{grid-template-columns:1fr}
   #result-inner{padding:10px 0 60px}
   .share-actions{flex-direction:column;align-items:stretch}
   .btn-share,.btn-copy,.btn-home{justify-content:center}
-  #logo{height:32px}
+  #logo{height:56px}
 }
 </style>
 </head>
@@ -420,8 +420,8 @@ I8F3OH26xcdN39Vag2r37YMPPvjggw8++OCDDz744IMPPvjggw8++OCDDz744IMPPvjggw8++DCO
 <div class="screen active" id="intro">
   <p class="eyebrow">Diagnóstico · Marca Personal</p>
   <h1>¿Cuál es el arquetipo<br>de tu <em>marca</em>?</h1>
-  <p>14 preguntas situacionales para identificar tu arquetipo dominante y secundario según el modelo de Margaret Mark & Carol S. Pearson — los 12 arquetipos universales de marca.</p>
-  <p class="meta">Tiempo estimado: 4–5 minutos</p>
+  <p>36 preguntas situacionales para identificar tu arquetipo dominante y secundario según el modelo de Margaret Mark & Carol S. Pearson — los 12 arquetipos universales de marca.</p>
+  <p class="meta">Tiempo estimado: 9–10 minutos</p>
   <button class="btn-primary" onclick="startTest()">
     Comenzar test
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -710,20 +710,115 @@ async function downloadPDF(){
   btn.innerHTML='<span>Generando PDF…</span>';
 
   try{
-    const target=document.getElementById('result-inner');
-    const shareBlock=document.getElementById('share-block');
-    shareBlock.style.visibility='hidden';
+    const primaryName=document.getElementById('result-archetype').textContent;
+    const primaryColor=document.getElementById('result-archetype').style.color;
+    const tagline=document.getElementById('result-tagline').textContent;
+    const secondaryName=document.getElementById('secondary-name').textContent;
+    const secondaryColor=document.getElementById('secondary-name').style.color;
+    const secondaryDesc=document.getElementById('secondary-desc').textContent;
+    const comboNote=document.getElementById('combination-note').textContent;
+    const personality=document.getElementById('result-personality').textContent;
+    const strategy=document.getElementById('result-strategy').textContent;
+    const traits=Array.from(document.querySelectorAll('#result-traits .trait-tag')).map(t=>t.textContent);
+    const paletteSwatches=Array.from(document.querySelectorAll('.palette-swatch')).map(s=>s.style.background);
+    const fonts=Array.from(document.querySelectorAll('.font-row')).map(f=>({
+      name:f.querySelector('.font-name').textContent,
+      role:f.querySelector('.font-role').textContent
+    }));
+    const brands=Array.from(document.querySelectorAll('.brand-tag')).map(b=>b.textContent);
+    const gridCards=Array.from(document.querySelectorAll('.r-card')).map(c=>({
+      title:c.querySelector('.r-card-title').textContent,
+      items:Array.from(c.querySelectorAll('li')).map(li=>li.textContent)
+    }));
 
-    const canvas=await html2canvas(target,{
-      backgroundColor:'#0A0A0A',
+    const logoSrc=document.getElementById('logo').src;
+
+    const pdfDoc=document.createElement('div');
+    pdfDoc.style.cssText='position:fixed;left:-9999px;top:0;width:794px;background:#FFFFFF;font-family:Inter,sans-serif;color:#1A1A1A;padding:56px 64px;';
+
+    let html='';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;border-bottom:1px solid #E5E5E0;padding-bottom:28px;">';
+    html+='<img src="'+logoSrc+'" style="height:64px;width:auto;">';
+    html+='<div style="text-align:right;font-size:10px;color:#888880;letter-spacing:0.08em;text-transform:uppercase;">Test de Arquetipo de Marca</div>';
+    html+='</div>';
+
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Tu arquetipo dominante</div>';
+    html+='<div style="font-size:52px;font-weight:300;letter-spacing:-0.02em;color:'+primaryColor+';margin-bottom:6px;">'+primaryName+'</div>';
+    html+='<div style="font-size:15px;color:#666660;margin-bottom:36px;">'+tagline+'</div>';
+
+    html+='<div style="background:#F7F7F4;border:1px solid #E5E5E0;padding:18px 22px;margin-bottom:32px;border-radius:3px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:6px;">Arquetipo secundario</div>';
+    html+='<div style="font-size:19px;font-weight:400;color:'+secondaryColor+';margin-bottom:4px;">'+secondaryName+'</div>';
+    html+='<div style="font-size:12px;color:#666660;line-height:1.6;margin-bottom:10px;">'+secondaryDesc+'</div>';
+    html+='<div style="font-size:12px;color:#666660;line-height:1.6;border-top:1px solid #E5E5E0;padding-top:10px;">'+comboNote+'</div>';
+    html+='</div>';
+
+    html+='<div style="margin-bottom:28px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Personalidad</div>';
+    html+='<div style="font-size:12.5px;line-height:1.75;color:#333330;white-space:pre-line;">'+personality+'</div>';
+    html+='</div>';
+
+    html+='<div style="margin-bottom:28px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Estrategia de marca</div>';
+    html+='<div style="font-size:12.5px;line-height:1.75;color:#333330;white-space:pre-line;">'+strategy+'</div>';
+    html+='</div>';
+
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;">';
+    gridCards.forEach(c=>{
+      html+='<div style="background:#F7F7F4;border:1px solid #E5E5E0;padding:14px 16px;border-radius:3px;">';
+      html+='<div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#888880;margin-bottom:8px;">'+c.title+'</div>';
+      html+='<ul style="margin:0;padding:0;">';
+      c.items.forEach(it=>{html+='<li style="list-style:none;font-size:11px;color:#444440;line-height:1.6;padding-left:12px;position:relative;"><span style="position:absolute;left:0;">–</span>'+it+'</li>';});
+      html+='</ul></div>';
+    });
+    html+='</div>';
+
+    html+='<div style="margin-bottom:28px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Palabras clave</div>';
+    html+='<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+    traits.forEach(t=>{html+='<span style="font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#666660;border:1px solid #DDDDD5;padding:5px 12px;border-radius:1px;">'+t+'</span>';});
+    html+='</div></div>';
+
+    html+='<div style="margin-bottom:28px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Paleta cromática</div>';
+    html+='<div style="display:flex;gap:0;border-radius:2px;overflow:hidden;height:32px;">';
+    paletteSwatches.forEach(c=>{html+='<div style="flex:1;background:'+c+';"></div>';});
+    html+='</div></div>';
+
+    html+='<div style="margin-bottom:28px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Tipografías recomendadas</div>';
+    fonts.forEach(f=>{
+      html+='<div style="margin-bottom:8px;">';
+      html+='<span style="font-size:12px;font-weight:600;color:#1A1A1A;">'+f.name+'</span>';
+      html+='<span style="font-size:11px;color:#888880;margin-left:8px;">'+f.role+'</span>';
+      html+='</div>';
+    });
+    html+='</div>';
+
+    html+='<div style="margin-bottom:36px;">';
+    html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Marcas de referencia</div>';
+    html+='<div style="display:flex;flex-wrap:wrap;gap:6px;">';
+    brands.forEach(b=>{html+='<span style="font-size:11px;color:#444440;border:1px solid #DDDDD5;padding:5px 14px;border-radius:1px;">'+b+'</span>';});
+    html+='</div></div>';
+
+    html+='<div style="border-top:1px solid #E5E5E0;padding-top:22px;text-align:center;">';
+    html+='<div style="font-size:11px;color:#888880;margin-bottom:4px;">Dr. Miguel Ávila · Estratega de marca</div>';
+    html+='<div style="font-size:11px;color:#888880;">www.drmiguelavila.com &nbsp;·&nbsp; WhatsApp +52 777 163 9759</div>';
+    html+='</div>';
+
+    pdfDoc.innerHTML=html;
+    document.body.appendChild(pdfDoc);
+
+    const canvas=await html2canvas(pdfDoc,{
+      backgroundColor:'#FFFFFF',
       scale:2,
       useCORS:true,
       logging:false
     });
 
-    shareBlock.style.visibility='visible';
+    document.body.removeChild(pdfDoc);
 
-    const imgData=canvas.toDataURL('image/jpeg',0.92);
+    const imgData=canvas.toDataURL('image/jpeg',0.95);
     const { jsPDF }=window.jspdf;
 
     const pdfWidth=210;
@@ -745,13 +840,10 @@ async function downloadPDF(){
       heightLeft-=pageHeight;
     }
 
-    const arc=document.getElementById('result-archetype').textContent;
-    const filename='Arquetipo-de-Marca-'+arc.replace(/\s+/g,'-')+'.pdf';
+    const filename='Arquetipo-de-Marca-'+primaryName.replace(/\s+/g,'-')+'.pdf';
     pdf.save(filename);
   }catch(err){
     console.error('Error generating PDF:',err);
-    const shareBlock=document.getElementById('share-block');
-    if(shareBlock) shareBlock.style.visibility='visible';
     alert('Hubo un problema al generar el PDF. Intenta de nuevo.');
   }finally{
     btn.disabled=false;

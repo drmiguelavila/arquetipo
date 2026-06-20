@@ -17,68 +17,52 @@
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;overflow:hidden}
 
-/* PROGRESS */
 #progress-track{position:fixed;top:0;left:0;right:0;height:3px;background:var(--surface);z-index:101}
-#progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;transition:width 0.5s ease;z-index:102;box-shadow:0 0 12px var(--purple)}
+#progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--purple);width:0%;transition:width 0.4s ease;z-index:102;box-shadow:0 0 12px var(--purple)}
 
-/* HEADER */
 #header{position:fixed;top:3px;left:0;right:0;padding:22px 48px;display:flex;align-items:center;justify-content:space-between;z-index:50}
 #logo{height:38px;width:auto;display:block}
-#brand{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
 #counter{font-size:11px;color:var(--purple-soft);letter-spacing:0.08em;font-weight:500;opacity:0;transition:opacity 0.4s}
 
-/* SCREENS */
 .screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 48px 60px;opacity:0;pointer-events:none;transition:opacity 0.5s ease}
 .screen.active{opacity:1;pointer-events:all}
 
-/* INTRO */
 #intro .eyebrow{font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:32px;text-align:center}
-#intro h1{font-size:clamp(28px,5.5vw,58px);font-weight:300;letter-spacing:-0.02em;line-height:1.1;text-align:center;max-width:620px;margin-bottom:18px}
+#intro h1{font-size:clamp(28px,5.5vw,58px);font-weight:300;letter-spacing:-0.02em;line-height:1.1;text-align:center;max-width:640px;margin-bottom:18px}
 #intro h1 em{font-style:normal;color:var(--muted)}
-#intro p{font-size:14px;color:var(--muted);text-align:center;max-width:400px;margin-bottom:52px;line-height:1.75}
+#intro p{font-size:14px;color:var(--muted);text-align:center;max-width:460px;margin-bottom:24px;line-height:1.75}
+#intro .meta{font-size:11px;color:var(--muted2);text-align:center;margin-bottom:48px;letter-spacing:0.04em}
 
-/* BTN */
 .btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--purple);color:var(--text);font-family:inherit;font-size:12px;font-weight:500;letter-spacing:0.06em;padding:14px 30px;border:none;cursor:pointer;transition:opacity 0.2s,transform 0.2s;border-radius:1px}
 .btn-primary:hover{opacity:0.86;transform:translateY(-1px)}
 .btn-ghost{background:transparent;color:var(--muted);font-family:inherit;font-size:12px;font-weight:400;letter-spacing:0.08em;padding:10px 0;border:none;cursor:pointer;transition:color 0.2s;margin-top:18px}
 .btn-ghost:hover{color:var(--text)}
 
-/* QUESTION */
 #q-category{font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:24px;align-self:flex-start;max-width:600px;width:100%}
-#q-text{font-size:clamp(20px,3.5vw,34px);font-weight:300;letter-spacing:-0.015em;line-height:1.25;max-width:600px;width:100%;margin-bottom:44px;min-height:100px}
-#options-container{display:flex;flex-direction:column;gap:10px;max-width:600px;width:100%}
+#q-text{font-size:clamp(20px,3.5vw,32px);font-weight:300;letter-spacing:-0.015em;line-height:1.3;max-width:600px;width:100%;margin-bottom:48px;min-height:90px}
 
+#options-container{display:flex;flex-direction:column;gap:10px;max-width:600px;width:100%}
 .option-btn{
-  background:var(--surface);
-  border:1px solid var(--border);
-  color:var(--text);
-  font-family:inherit;font-size:13.5px;font-weight:400;line-height:1.55;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-family:inherit;font-size:13.5px;font-weight:400;line-height:1.5;
   padding:16px 22px;text-align:left;cursor:pointer;
   transition:border-color 0.18s,background 0.18s,transform 0.14s;
-  border-radius:2px;
-  position:relative;overflow:hidden;
+  border-radius:2px;position:relative;overflow:hidden;
 }
-.option-btn::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--purple);transform:scaleY(0);transition:transform 0.18s ease;
-  transform-origin:center;
-}
+.option-btn::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--purple);transform:scaleY(0);transition:transform 0.18s ease;transform-origin:center}
 .option-btn:hover{border-color:var(--purple);background:var(--surface2);transform:translateX(4px)}
 .option-btn:hover::before{transform:scaleY(1)}
 .option-btn.selected{border-color:var(--purple);background:var(--purple-dim)}
 .option-btn.selected::before{transform:scaleY(1)}
 
-/* RESULT SCREEN */
 #result-screen{overflow-y:auto;overflow-x:hidden;padding-top:90px;align-items:flex-start;justify-content:flex-start}
-#result-tide{position:fixed;bottom:0;left:0;right:0;height:0%;transition:height 1.6s cubic-bezier(0.16,1,0.3,1);z-index:0;opacity:0.09;pointer-events:none}
+#result-tide{position:fixed;bottom:0;left:0;right:0;height:0%;transition:height 1.4s cubic-bezier(0.16,1,0.3,1);z-index:0;opacity:0.09;pointer-events:none}
 #result-inner{position:relative;z-index:1;max-width:680px;width:100%;margin:0 auto;padding:20px 0 80px}
 
-/* RESULT HEADER */
 #result-label{font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
 #result-archetype{font-size:clamp(42px,9vw,88px);font-weight:300;letter-spacing:-0.03em;line-height:1;margin-bottom:6px}
 #result-tagline{font-size:clamp(14px,2.2vw,19px);font-weight:300;color:var(--muted);margin-bottom:44px}
 
-/* SECONDARY */
 #secondary-block{background:var(--surface);border:1px solid var(--border);padding:20px 24px;margin-bottom:40px;border-radius:2px}
 #secondary-label{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 #secondary-name{font-size:22px;font-weight:300;margin-bottom:6px}
@@ -88,7 +72,8 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .r-divider{width:32px;height:1px;background:var(--purple-dim);margin:0 0 32px}
 .r-section{margin-bottom:40px}
 .r-section-title{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:14px}
-.r-body{font-size:14px;color:var(--muted);line-height:1.8}
+.r-body{font-size:14px;color:var(--muted);line-height:1.8;white-space:pre-line}
+
 .r-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
 .r-card{background:var(--surface);border:1px solid var(--border);padding:20px 22px;border-radius:2px}
 .r-card-title{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:10px}
@@ -100,7 +85,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .trait-tag{font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--purple-soft);border:1px solid var(--purple-dim);padding:6px 14px;border-radius:1px}
 
 .palette-row{display:flex;gap:0;margin-bottom:8px;overflow:hidden;border-radius:2px}
-.palette-swatch{height:40px;flex:1;position:relative;cursor:default}
+.palette-swatch{height:40px;flex:1;position:relative}
 .palette-hex{font-size:9px;color:var(--muted);margin-top:4px;display:flex;flex-wrap:wrap;gap:6px}
 .palette-hex span{opacity:0.6}
 
@@ -112,7 +97,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 
 .brand-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);border:1px solid var(--border);padding:6px 14px;margin:4px 4px 0 0;border-radius:1px}
 
-/* SHARE BLOCK */
 #share-block{background:var(--surface);border:1px solid var(--purple-dim);padding:20px 24px;margin-top:48px;border-radius:2px}
 #share-label{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-soft);margin-bottom:12px}
 #share-url{font-size:11px;color:var(--muted);word-break:break-all;line-height:1.6;background:var(--bg);padding:12px 16px;border-radius:1px;margin-bottom:14px;border:1px solid var(--border)}
@@ -126,13 +110,12 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .btn-share:disabled,.btn-copy:disabled{opacity:0.5;cursor:wait}
 #copy-feedback{font-size:11px;color:var(--purple-soft);opacity:0;transition:opacity 0.3s;align-self:center}
 
-/* ANIMATE */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity 0.6s ease,transform 0.6s ease}
 .revealed{opacity:1;transform:translateY(0)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn 0.42s ease forwards}
 
-@media(max-width:600px){
+@media(max-width:640px){
   #header{padding:18px 22px}
   .screen{padding:80px 22px 40px}
   .r-grid{grid-template-columns:1fr}
@@ -437,7 +420,8 @@ I8F3OH26xcdN39Vag2r37YMPPvjggw8++OCDDz744IMPPvjggw8++OCDDz744IMPPvjggw8++DCO
 <div class="screen active" id="intro">
   <p class="eyebrow">Diagnóstico · Marca Personal</p>
   <h1>¿Cuál es el arquetipo<br>de tu <em>marca</em>?</h1>
-  <p>12 preguntas situacionales para identificar tu arquetipo dominante y secundario según el modelo de Margaret Mark & Carol S. Pearson.</p>
+  <p>14 preguntas situacionales para identificar tu arquetipo dominante y secundario según el modelo de Margaret Mark & Carol S. Pearson — los 12 arquetipos universales de marca.</p>
+  <p class="meta">Tiempo estimado: 4–5 minutos</p>
   <button class="btn-primary" onclick="startTest()">
     Comenzar test
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -534,262 +518,8 @@ I8F3OH26xcdN39Vag2r37YMPPvjggw8++OCDDz744IMPPvjggw8++OCDDz744IMPPvjggw8++DCO
   </div>
 </div>
 
+<script src="data.js"></script>
 <script>
-const ARCHETYPES = {
-  inocente:{name:"El Inocente",tagline:"La felicidad está aquí, ahora.",color:"#D4A574",
-    keywords:["Optimista","Puro","Honesto","Sencillo","Confiado","Leal","Romántico","Positivo","Nostálgico","Transparente"],
-    objective:"Ser feliz y encontrar la felicidad en las cosas simples de la vida.",
-    fortalezas:["Genera confianza y simpatía","Comunica autenticidad genuina","Despierta nostalgia positiva","Tono accesible y cálido"],
-    debilidades:["Puede percibirse como ingenuo","Difícil de sostener ante crisis","Riesgo de parecer superficial"],
-    metas:["Transmitir optimismo genuino","Conectar emocionalmente","Crear comunidades positivas"],
-    miedos:["Ser visto como deshonesto","La complejidad y el caos","Perder la inocencia o la pureza"],
-    personality:"El Inocente tiene un deseo profundo de encontrar y compartir la felicidad. Su visión del mundo es optimista y cree genuinamente que las cosas simples son las más valiosas. No busca complicar: busca claridad, bondad y momentos de alegría auténtica.\n\nEsta personalidad se manifiesta en marcas que prometen bienestar, simplicidad y experiencias puras. Su audiencia los sigue porque representan una pausa en la complejidad del mundo moderno.",
-    strategy:"Las marcas Inocente funcionan mejor cuando apelan a la nostalgia y a la pureza de experiencias simples. Su comunicación debe ser cálida, directa y esperanzadora. Evitan la ironía y el cinismo. Son ideales para públicos que valoran la autenticidad sobre la sofisticación.",
-    palette:["#FFF8F0","#FFD9B5","#F4A261","#E76F51","#D4A574","#A67C52","#8B5E3C","#5C3D2E"],
-    fonts:[{name:"Caviar Dreams",role:"Display — Elegante y accesible"},{name:"Retromark Script",role:"Acento — Calidez y personalidad"},{name:"Aller",role:"Cuerpo — Legible y amable"}],
-    brands:["Coca-Cola","Dove","McDonald's","Dior","Disney","Innocent Drinks"],
-    actitud:"Marcas que prefieren la sencillez, la honestidad y el optimismo. Crean conexiones emocionales basadas en la confianza."},
-
-  explorador:{name:"El Explorador",tagline:"No te conformes. El mundo está por descubrir.",color:"#6B8E6B",
-    keywords:["Libre","Aventurero","Auténtico","Independiente","Curioso","Pionero","Nómada","Salvaje","Descubridor","Intrépido"],
-    objective:"Descubrir el mundo y vivir con plena autenticidad y libertad.",
-    fortalezas:["Inspira aventura y novedad","Atrae audiencias con mentalidad abierta","Diferenciación por autenticidad","Comunidad leal y apasionada"],
-    debilidades:["Puede percibirse como irresponsable","Difícil de escalar sin perder autenticidad","Resistencia a la estructura"],
-    metas:["Impulsar la búsqueda personal","Celebrar la independencia","Mostrar mundos posibles"],
-    miedos:["El estancamiento y la rutina","La conformidad y la mediocridad","Perder la libertad o la autenticidad"],
-    personality:"El Explorador no se conforma con la vida ordinaria. Busca constantemente experiencias nuevas, horizontes desconocidos y la versión más auténtica de sí mismo. Su filosofía es simple: vivir de manera plena significa salir de la zona de confort.\n\nEsta personalidad conecta con audiencias que sienten que hay más por descubrir, tanto en el mundo exterior como en su interior. Representan el espíritu pionero.",
-    strategy:"Las marcas Explorador conectan mejor con mensajes de libertad, autenticidad y descubrimiento personal. Su comunicación es activa, visual y evocadora. Deben evitar parecer corporativas o demasiado pulidas. Funcionan mejor en plataformas visuales y en colaboración con comunidades activas.",
-    palette:["#F4F1E8","#D4C5A9","#8B7355","#6B8E6B","#4A7C59","#2D5A3D","#1A3A2A","#0D2018"],
-    fonts:[{name:"Helvetica Neue",role:"Display — Limpio y directo"},{name:"Gotham",role:"Títulos — Fuerza y modernidad"},{name:"Baskerville",role:"Cuerpo — Autoridad clásica"}],
-    brands:["Jeep","The North Face","Patagonia","Virgin","Red Bull","National Geographic"],
-    actitud:"Marcas que celebran la aventura, la autenticidad y la exploración. Atraen a quienes buscan vivir sin límites artificiales."},
-
-  sabio:{name:"El Sabio",tagline:"La verdad te hará libre.",color:"#4A6FA5",
-    keywords:["Experto","Analítico","Reflexivo","Erudito","Inteligente","Crítico","Objetivo","Investigador","Mentor","Visionario"],
-    objective:"Usar la inteligencia y el análisis para entender el mundo y guiar a otros.",
-    fortalezas:["Alta credibilidad y autoridad","Genera confianza intelectual","Ideal para nichos especializados","Contenido de alto valor"],
-    debilidades:["Puede percibirse como frío o distante","Riesgo de elitismo o inaccesibilidad","Comunicación compleja si no se modera"],
-    metas:["Compartir conocimiento transformador","Ser referente en su campo","Elevar el nivel del debate"],
-    miedos:["La ignorancia y la superficialidad","Ser mal interpretado o citado fuera de contexto","Perder la objetividad"],
-    personality:"El Sabio cree que la verdad, el conocimiento y la comprensión profunda son los mayores bienes que puede ofrecer. No se conforma con respuestas superficiales: investiga, analiza y sintetiza para ofrecer perspectivas que realmente transformen.\n\nSu audiencia lo busca cuando necesita claridad en la complejidad. El Sabio es el arquetipo del consultor de alto nivel, del pensador estratégico y del académico aplicado.",
-    strategy:"Las marcas Sabio construyen autoridad a través del contenido de alta calidad, la investigación rigurosa y la comunicación clara pero profunda. Deben demostrar expertise genuino, no aparentarlo. Funcionan especialmente bien en B2B, consultoría, educación y sectores de alta especialización.",
-    palette:["#F0F4F8","#C5D4E8","#8BA3C7","#4A6FA5","#2E4F7A","#1A3254","#0D1F35","#060E1A"],
-    fonts:[{name:"Source Sans Variable",role:"Display — Moderno y legible"},{name:"Gill Sans MT",role:"Títulos — Autoridad editorial"},{name:"Minion Pro",role:"Cuerpo — Elegancia académica"}],
-    brands:["TED","Harvard","Google","The Economist","McKinsey","National Geographic"],
-    actitud:"Marcas que comparten conocimiento genuino para transformar perspectivas. Liderazgo intelectual como propuesta de valor central."},
-
-  heroe:{name:"El Héroe",tagline:"Donde hay voluntad, hay un camino.",color:"#C0392B",
-    keywords:["Valiente","Competitivo","Disciplinado","Superador","Determinado","Triunfador","Resiliente","Poderoso","Inspirador","Campeón"],
-    objective:"Demostrar que con esfuerzo, disciplina y valentía se puede superar cualquier obstáculo.",
-    fortalezas:["Inspira acción y superación","Genera lealtad emocional intensa","Ideal para marcas de performance","Narrativas motivacionales potentes"],
-    debilidades:["Puede parecer agresivo o excluyente","Presión por mantener imagen de éxito","Difícil de humanizar"],
-    metas:["Inspirar a otros a superarse","Demostrar excelencia en acción","Crear comunidades de alto rendimiento"],
-    miedos:["La debilidad y la rendición","El fracaso sin aprendizaje","Ser percibido como ordinario"],
-    personality:"El Héroe vive para superar desafíos. Su motivación central es la mejora continua, la excelencia y la demostración de que el esfuerzo sostenido produce resultados extraordinarios. No evita la adversidad: la busca como terreno de crecimiento.\n\nSu audiencia lo sigue porque necesita creer que pueden más. El Héroe les devuelve esa convicción con evidencia y ejemplo.",
-    strategy:"Las marcas Héroe utilizan narrativas de superación, testimonios de logro y lenguaje de acción. Su visual es dinámico, poderoso y aspiracional. Deben mostrar resultados reales, no solo prometerlos. Funcionan mejor en deportes, fitness, desarrollo personal y sectores competitivos.",
-    palette:["#FFF5F5","#FFCCCC","#FF6B6B","#C0392B","#922B21","#641E16","#3D1008","#1A0504"],
-    fonts:[{name:"Impact",role:"Display — Fuerza bruta y directa"},{name:"Bebas Neue",role:"Títulos — Energía y potencia"},{name:"Roboto",role:"Cuerpo — Moderno y funcional"}],
-    brands:["Nike","FedEx","Adidas","Under Armour","Duracell","U.S. Army"],
-    actitud:"Marcas que creen en el potencial humano y lo demuestran. Inspiran a audiencias a alcanzar su máxima versión."},
-
-  rebelde:{name:"El Rebelde",tagline:"Las reglas existen para ser cuestionadas.",color:"#E74C3C",
-    keywords:["Disruptivo","Provocador","Auténtico","Revolucionario","Libre","Irreverente","Contracultura","Radical","Genuino","Transgresor"],
-    objective:"Cuestionar el status quo y liberar a las personas de estructuras que las limitan.",
-    fortalezas:["Diferenciación radical","Comunidades extremadamente leales","Alta recordación de marca","Autenticidad percibida como incomparable"],
-    debilidades:["Puede alienar audiencias conservadoras","Difícil de escalar sin perder esencia","Riesgo de controversia no gestionada"],
-    metas:["Romper con lo establecido","Dar voz a los inconformes","Demostrar que existe otra manera"],
-    miedos:["La conformidad y el compromiso","Convertirse en lo que critica","Perder la autenticidad por el éxito"],
-    personality:"El Rebelde existe para demostrar que hay otra forma de hacer las cosas. No se rebela por rebeldía: lo hace porque ve hipocresía, ineficiencia o injusticia en el sistema establecido y se niega a fingir que no existe.\n\nSu audiencia no lo sigue por moda: lo sigue porque siente que finalmente hay alguien que dice lo que todos piensan pero nadie se atreve a decir.",
-    strategy:"Las marcas Rebelde comunican con provocación calculada, honestidad brutal y estética contracultural. Deben ser consistentes: un Rebelde que negocia con el sistema pierde todo. Funcionan en categorías donde existe frustración acumulada con las opciones existentes.",
-    palette:["#1A0000","#3D0000","#8B0000","#C0392B","#E74C3C","#FF6B35","#FF9A3C","#FFC567"],
-    fonts:[{name:"Oswald",role:"Display — Impacto directo"},{name:"Impact",role:"Acento — Provocación visual"},{name:"Montserrat",role:"Cuerpo — Moderno y accesible"}],
-    brands:["Harley-Davidson","Diesel","Virgin","Apple (origen)","Napster","Banksy"],
-    actitud:"Marcas que se posicionan contra el establishment. Su propuesta de valor es la autenticidad radical y el coraje de ser diferente."},
-
-  mago:{name:"El Mago",tagline:"Haz realidad lo que imaginas.",color:"#8E44AD",
-    keywords:["Visionario","Transformador","Carismático","Poderoso","Intuitivo","Iluminado","Inspirador","Innovador","Misterioso","Catalizador"],
-    objective:"Transformar la realidad y hacer que los sueños se conviertan en experiencias tangibles.",
-    fortalezas:["Posicionamiento premium natural","Genera fascinación y deseo","Narrativas de transformación poderosas","Alta diferenciación percibida"],
-    debilidades:["Difícil de mantener a largo plazo","Expectativas muy altas por cumplir","Riesgo de percepción de manipulación"],
-    metas:["Catalizar transformaciones profundas","Crear momentos de revelación","Construir mundos de posibilidad"],
-    miedos:["No cumplir con las expectativas","Perder el sentido de maravilla","Que la magia sea reducida a lo ordinario"],
-    personality:"El Mago transforma lo ordinario en extraordinario. No solo vende productos o servicios: vende experiencias de transformación. Su promesa implícita es que después de interactuar con su marca, algo en ti habrá cambiado para siempre.\n\nSu audiencia busca más que funcionalidad: busca revelación. El Mago les da acceso a un mundo donde los límites entre lo posible y lo imposible se disuelven.",
-    strategy:"Las marcas Mago comunican con experiencias inmersivas, narrativas de transformación y lenguaje evocador. Deben sorprender constantemente. Su visual es oscuro, misterioso o luminoso dependiendo del contexto. Funcionan excepcionalmente bien en tecnología, lujo y entretenimiento.",
-    palette:["#0D0012","#1A0028","#3D0066","#6A0DAD","#8E44AD","#A569BD","#C39BD3","#E8D5F5"],
-    fonts:[{name:"Didot",role:"Display — Elegancia transformadora"},{name:"Cormorant Garamond",role:"Títulos — Misticismo refinado"},{name:"Libre Baskerville",role:"Cuerpo — Autoridad clásica"}],
-    brands:["Apple","Tesla","Disney","Dyson","Mastercard","Listerine"],
-    actitud:"Marcas que prometen transformar vidas y realidades. Su poder está en hacer que lo imposible parezca inevitable."},
-
-  comun:{name:"El Hombre Común",tagline:"Todos merecemos pertenecer.",color:"#5D6D7E",
-    keywords:["Cercano","Accesible","Honesto","Inclusivo","Solidario","Práctico","Empático","Sin pretensiones","Confiable","Auténtico"],
-    objective:"Crear sentido de pertenencia y demostrar que todos, sin excepción, tienen valor.",
-    fortalezas:["Alta identificación emocional","Base de clientes amplia y diversa","Comunicación natural y sin barreras","Confianza construida desde la cercanía"],
-    debilidades:["Difícil diferenciación por precio","Riesgo de parecer genérico","Tensión con posicionamiento premium"],
-    metas:["Crear comunidades de pertenencia","Eliminar barreras de acceso","Demostrar que la calidad es para todos"],
-    miedos:["La exclusión y el elitismo","Perder el contacto con la realidad","Ser percibido como mediocre"],
-    personality:"El Hombre Común no busca ser especial: busca ser auténtico. Su mayor fortaleza es la identificación: cuando su audiencia lo ve, se ve a sí misma. No hay distancia, no hay pedestal, no hay performance de superioridad.\n\nEsta autenticidad construye una lealtad diferente: no de admiración sino de afecto genuino. Son marcas en las que confías porque sientes que te entienden de verdad.",
-    strategy:"Las marcas del Hombre Común comunican con humor honesto, situaciones cotidianas y lenguaje sin pretensiones. Evitan la aspiracionalidad exagerada. Funcionan mejor con testimoniales reales, humor situacional y promesas simples pero cumplidas.",
-    palette:["#F5F5F5","#CCCCCC","#999999","#666666","#5D6D7E","#3D4D5E","#2C3E50","#1A252F"],
-    fonts:[{name:"Lato",role:"Display — Accesible y humano"},{name:"Open Sans",role:"Títulos — Claridad y cercanía"},{name:"Georgia",role:"Cuerpo — Familiaridad clásica"}],
-    brands:["IKEA","Gap","eBay","Levi's","Home Depot","Target"],
-    actitud:"Marcas que celebran la normalidad y la inclusión. Su propuesta es que todos merecen acceso a productos y experiencias de calidad."},
-
-  seductor:{name:"El Seductor",tagline:"El placer es una forma de inteligencia.",color:"#B03060",
-    keywords:["Sensual","Apasionado","Íntimo","Seductor","Sofisticado","Magnético","Atractivo","Deseable","Exclusivo","Intenso"],
-    objective:"Crear experiencias de deseo, intimidad y placer que conecten profundamente.",
-    fortalezas:["Alta aspiracionalidad y deseo","Posicionamiento premium natural","Lealtad emocional intensa","Diferenciación por experiencia sensorial"],
-    debilidades:["Segmentación de audiencia estrecha","Riesgo de objetivización","Difícil de ejecutar sin parecer vulgar"],
-    metas:["Despertar el deseo y la pasión","Crear momentos de intimidad","Posicionarse como símbolo de placer y sofisticación"],
-    miedos:["La frialdad y la indiferencia","Perder el atractivo o la relevancia","La vulgaridad no intencionada"],
-    personality:"El Seductor entiende que el deseo es una de las fuerzas más poderosas en la decisión humana. No vende productos: vende experiencias de placer, intimidad y conexión emocional profunda.\n\nSu audiencia no compra por necesidad: compra por deseo. Y el Seductor sabe que ese deseo debe ser cuidado, cultivado y renovado constantemente.",
-    strategy:"Las marcas Seductoras comunican con imágenes aspiracionales, lenguaje evocador y experiencias sensoriales. Deben equilibrar accesibilidad con exclusividad. Funcionan excepcionalmente en moda, belleza, gastronomía y entretenimiento.",
-    palette:["#1A0505","#3D0A0A","#7B1A1A","#B03060","#C0392B","#CD6155","#E8A598","#F9E0DD"],
-    fonts:[{name:"Bodoni MT",role:"Display — Lujo y sensualidad"},{name:"Playfair Display",role:"Títulos — Elegancia dramática"},{name:"Adobe Caslon",role:"Cuerpo — Sofisticación atemporal"}],
-    brands:["Chanel","Victoria's Secret","Godiva","Alfa Romeo","Dior","Lancôme"],
-    actitud:"Marcas que apelan al deseo y la aspiración. Crean una relación íntima y exclusiva con sus audiencias basada en el placer."},
-
-  bufon:{name:"El Bufón",tagline:"La vida es demasiado corta para tomársela en serio.",color:"#F39C12",
-    keywords:["Divertido","Irreverente","Espontáneo","Alegre","Despreocupado","Ingenioso","Juguetón","Entretenido","Humorístico","Liberador"],
-    objective:"Traer alegría, ligereza y diversión genuina al mundo.",
-    fortalezas:["Alta recordación por humor","Accesibilidad y simpatía naturales","Viralidad orgánica","Conexión emocional rápida"],
-    debilidades:["Difícil de sostener con calidad constante","Riesgo de perder credibilidad","Límite difuso entre humor y falta de seriedad"],
-    metas:["Hacer reír y disfrutar","Quitar el miedo a lo cotidiano","Crear momentos de conexión ligera"],
-    miedos:["El aburrimiento y la solemnidad","Que nadie ría","Ser ignorado o irrelevante"],
-    personality:"El Bufón sabe que la alegría es una necesidad humana fundamental, no un lujo. Su capacidad para encontrar humor en lo cotidiano, para quitarle dramatismo a lo serio y para hacer que la gente se relaje, es su superpoder.\n\nNo es superficial: detrás del humor del Bufón hay una comprensión profunda de la psicología humana. Sabe exactamente qué toca resortes emocionales y usa ese conocimiento para conectar.",
-    strategy:"Las marcas Bufón comunican con humor inteligente, situaciones absurdas pero reconocibles y un tono que nunca se toma demasiado en serio a sí mismo. Deben ser genuinamente graciosas, no forzadamente. Funcionan en snacks, entretenimiento, apps y cualquier categoría donde el usuario quiera escapar del estrés.",
-    palette:["#FFF9E6","#FFE599","#FFD04D","#F39C12","#D68910","#A97113","#7D5A12","#52400D"],
-    fonts:[{name:"Pacifico",role:"Display — Desenfado y carisma"},{name:"Fredoka One",role:"Títulos — Juguetón y accesible"},{name:"Nunito",role:"Cuerpo — Amigable y legible"}],
-    brands:["M&M's","Old Spice","Dollar Shave Club","Ben & Jerry's","MailChimp","Deadpool"],
-    actitud:"Marcas que usan el humor como conexión genuina. Su irreverencia es calculada y su objetivo siempre es hacer sonreír."},
-
-  cuidador:{name:"El Cuidador",tagline:"Cuida a los demás.",color:"#5B8A6F",
-    keywords:["Empático","Generoso","Compasivo","Guardián","Altruista","Paciente","Protector","Servicial","Desinteresado","Consolador"],
-    objective:"Ayudar y proteger a los demás, construyendo comunidades fuertes y sostenibles.",
-    fortalezas:["Brindando comodidad y servicio genuino","Creando estructura y estabilidad","Construyendo comunidades fuertes","Alta confianza y lealtad de clientes"],
-    debilidades:["Puede permitir el mal comportamiento","Propenso a convertirse en mártir","Dificultad para decir que no"],
-    metas:["Cuidar de otras personas","Marcar la diferencia en el mundo","Proteger a las personas de cualquier daño"],
-    miedos:["Inestabilidad y caos","Ser visto como egoísta o ingrato","Quemarse y resentirse"],
-    personality:"El Cuidador es altruista, movido por la compasión, la generosidad y el desinterés para ayudar a los demás. Aunque es propenso al martirio, el cuidador interior nos ayuda a criar a nuestros hijos, ayudar a los necesitados y construir estructuras para sustentar la vida.\n\nEsta personalidad se manifiesta perfectamente en la profesión de enfermería y en organizaciones de servicio. Los cuidadores no solo son reactivos, también son preventivos y tienden a estar dentro y alrededor de un evento de daño, antes o después.",
-    strategy:"El arquetipo Cuidador es perfecto para las marcas que ayudan a los necesitados. Las personas vulnerables requieren un toque suave. Un enfoque cálido, atento, generoso y maternal ofrece seguridad. El objetivo es hacer que sus clientes se sientan seguros, protegidos y atendidos.",
-    palette:["#F0F7F4","#C8E6D4","#8FD3B0","#5B8A6F","#3D6B52","#2A4F3C","#1A3329","#0D1F18"],
-    fonts:[{name:"Univers",role:"Display — Limpio y cuidadoso"},{name:"Britanic D Ultra",role:"Acento — Calidez y fuerza"},{name:"Arial",role:"Cuerpo — Claridad y servicio"}],
-    brands:["Nestlé","UNICEF","Johnson & Johnson","Danone","Cruz Roja","Médicos Sin Fronteras"],
-    actitud:"Marcas que anteponen el bienestar de sus clientes. Su comunicación es cálida, educativa y centrada en el cuidado genuino."},
-
-  creador:{name:"El Creador",tagline:"Se crea a sí mismo.",color:"#6B4F8A",
-    keywords:["Artista","Visionario","Innovador","Creativo","Auténtico","Imaginativo","Expresivo","Inventor","Empresario","Soñador"],
-    objective:"Materializar las ideas en hechos y objetos tangibles que permanezcan en el tiempo.",
-    fortalezas:["Pensar más allá de los límites establecidos","Empujando fronteras constantemente","Ejecutando hábilmente ideas abstractas","Alta originalidad y distinción"],
-    debilidades:["Perfeccionismo extremo","A veces impráctico","Puede ser insensible o arrogante cuando está en flujo"],
-    metas:["Crear cosas de valor duradero","Mejorar continuamente su habilidad","Expresarse plenamente en cada obra"],
-    miedos:["La mediocridad","Ser visto como un vendido","No poder ejecutar una visión"],
-    personality:"El Creador fomenta todos los esfuerzos imaginativos, desde el arte más elevado hasta la más pequeña innovación en el estilo de vida. Los creadores buscan probar la realidad fuera de sus mentes. Una parte fundamental de su búsqueda es encontrarse y aceptarse a sí mismos.\n\nDebidamente canalizado, nos ayuda a expresarnos de manera hermosa. Adverso a la estasis, puede hacernos sobrecargar nuestras vidas con nuevos proyectos constantes.",
-    strategy:"Para atraer a un Creador, debe celebrar el proceso creativo mientras inspira la autoexpresión. Las marcas que proporcionan herramientas para expresarse creativamente con libertad de elección estarían bien posicionadas. Su comunicación debe despertar el deseo del proceso creativo.",
-    palette:["#F5F0FA","#D4B8E8","#A97DC8","#8B5E9F","#6B4F8A","#4A3366","#2E1F44","#170F22"],
-    fonts:[{name:"Myriad Pro",role:"Display — Moderno e innovador"},{name:"San Francisco",role:"Títulos — Tecnología y visión"},{name:"Lego Thick",role:"Acento — Creatividad lúdica"}],
-    brands:["Apple","LEGO","Canon","Adobe","Pixar","Spotify"],
-    actitud:"Marcas que dan a sus usuarios la posibilidad de desarrollar sus propias creaciones a partir de sus productos. Siempre van un paso adelante."},
-
-  rey:{name:"El Rey",tagline:"Crea orden a partir del caos.",color:"#C8A96E",
-    keywords:["Líder","Soberano","Responsable","Estructurado","Seguro","Fuerte","Organizado","Estable","Político","Aristócrata"],
-    objective:"Crear una comunidad exclusiva unida por el éxito profesional, el prestigio y una posición social privilegiada.",
-    fortalezas:["Personalidades naturalmente dominantes","Ofrece seguridad y estabilidad","Sofisticado y autorizado","Alta percepción de valor y exclusividad"],
-    debilidades:["Fácilmente corruptible","Puede ser demasiado controlador","A veces puede tener derecho o codicia"],
-    metas:["Ser poderoso e influyente","Para crear riqueza y prosperidad","Ser respetado y reconocido"],
-    miedos:["Caos e inestabilidad","Siendo derrocado o desplazado","Ser visto como débil"],
-    personality:"El gobernante desea control sobre todo lo demás y es una personalidad dominante. Son autoritarios en su comunicación y tienen un sentido de intimidación. Su objetivo es la prosperidad y el éxito y que esa prosperidad llegue a aquellos que son leales a su gobierno.\n\nSon seguros, responsables y controlan sus vidas. Los gobernantes se ven a sí mismos en la cima de la cadena alimentaria y defienden agresivamente esa posición.",
-    strategy:"Para apelar a un gobernante, debes reafirmar su sentido de poder, control y respeto. Quieren tener una sensación de superioridad. Que sean parte de un exclusivo club V.I.P. Las marcas gobernantes deben proporcionar a sus clientes una reafirmación sensata de que están en la cima de la escalera del éxito.",
-    palette:["#FAF5E4","#F0E0B0","#D4B86A","#C8A96E","#A8873A","#7A6020","#4A3A10","#2A2008"],
-    fonts:[{name:"Futura STD Book",role:"Display — Dominante y moderno"},{name:"Corporate A BQ",role:"Títulos — Refinado y exclusivo"},{name:"Garamond",role:"Cuerpo — Éxito y elegancia atemporal"}],
-    brands:["Rolex","Mercedes-Benz","Amazon","Louis Vuitton","American Express","Rolls-Royce"],
-    actitud:"Marcas de tipo premium cuyo público tiene un estatus socioeconómico alto. Crean comunidades de éxito y pertenencia exclusiva."}
-};
-
-const COMBINATIONS={
-  "inocente-explorador":"La combinación Inocente + Explorador crea una marca de autenticidad pura: optimista y libre. Ideal para productos de bienestar y estilo de vida que prometen aventuras simples y genuinas.",
-  "inocente-sabio":"Inocente + Sabio genera credibilidad con calidez. Una marca que enseña desde la honestidad, sin pretensiones académicas. Funciona bien en educación accesible y consultoría humana.",
-  "sabio-heroe":"Sabio + Héroe es la combinación del estratega de alto rendimiento. Conocimiento aplicado con disciplina de ejecución. Ideal para consultoría de negocios y liderazgo ejecutivo.",
-  "sabio-mago":"Sabio + Mago crea la marca del visionario intelectual. Combina rigor analítico con capacidad de transformación. Excepcional para marcas de tecnología avanzada e innovación estratégica.",
-  "sabio-rey":"Sabio + Rey es el arquetipo del líder-estratega. Autoridad construida desde el conocimiento profundo. Muy efectivo para marcas de consultoría premium y liderazgo organizacional.",
-  "heroe-mago":"Héroe + Mago: la transformación a través del esfuerzo extraordinario. Marcas que prometen cambios profundos a través de la acción disciplinada. Poderosa en coaching de alto rendimiento.",
-  "heroe-rey":"Héroe + Rey combina la excelencia con la autoridad. Marcas que no solo logran resultados extraordinarios sino que los institucionaliza. Ideal para marcas de liderazgo y deportes de élite.",
-  "rebelde-creador":"Rebelde + Creador: la innovación como acto político. Crea cosas nuevas precisamente porque lo existente es insuficiente. El arquetipo de los artistas-empresarios que construyen alternativas.",
-  "mago-rey":"Mago + Rey es la combinación premium por excelencia. Transforma y lidera con autoridad absoluta. Las marcas de lujo que no solo son caras sino verdaderamente transformadoras.",
-  "mago-creador":"Mago + Creador genera la marca del genio innovador. Transforma a través de la creación de mundos nuevos. El arquetipo de las marcas tecnológicas que cambian civilizaciones.",
-  "cuidador-sabio":"Cuidador + Sabio: el mentor que transforma desde el cuidado genuino. Comparte conocimiento para proteger y empoderar. Ideal para educación, salud y consultoría con impacto social.",
-  "cuidador-rey":"Cuidador + Rey: lidera para servir. Una autoridad que usa su poder para construir estructuras que protejan a los más vulnerables. Ideal para instituciones y marcas de responsabilidad social.",
-  "creador-sabio":"Creador + Sabio: innovación con fundamento. Crea desde el conocimiento profundo, no desde la intuición sola. Ideal para marcas editoriales, educativas y de tecnología aplicada.",
-  "rey-sabio":"Rey + Sabio es la combinación del líder intelectual. Autoridad fundada en el conocimiento. Marcas de consultoría estratégica de alto nivel y liderazgo ejecutivo premium."
-};
-
-function getCombNote(a1,a2){
-  return COMBINATIONS[a1+"-"+a2]||COMBINATIONS[a2+"-"+a1]||
-    "La combinación de "+ARCHETYPES[a1].name+" y "+ARCHETYPES[a2].name+" crea una marca con dimensiones complementarias. El primero define tu esencia, el segundo añade el matiz que te hace único e irrepetible.";
-}
-
-const QUESTIONS=[
-  {category:"Motivación central",text:"¿Qué te impulsa más profundamente en tu trabajo?",options:[
-    {text:"Ayudar a otros a crecer, protegerlos y estar bien",scores:{cuidador:3,inocente:1}},
-    {text:"Crear algo nuevo que no existía antes y dejar huella",scores:{creador:3,mago:1}},
-    {text:"Construir estructuras que perduren y dar orden al caos",scores:{rey:3,sabio:1}},
-    {text:"Descubrir nuevas perspectivas y vivir con autenticidad total",scores:{explorador:3,bufon:1}}]},
-  {category:"Estilo de liderazgo",text:"Cuando lideras un equipo, tu instinto natural es…",options:[
-    {text:"Escuchar primero, asegurarme de que todos estén bien",scores:{cuidador:3,comun:1}},
-    {text:"Proponer ideas disruptivas y empujar los límites",scores:{creador:3,rebelde:1}},
-    {text:"Establecer dirección clara y asumir la responsabilidad total",scores:{rey:3,heroe:1}},
-    {text:"Inspirar con visión y crear un ambiente de posibilidad",scores:{mago:3,explorador:1}}]},
-  {category:"Miedo profundo",text:"¿Cuál de estos escenarios te perturba más?",options:[
-    {text:"Ver que alguien sufre y no poder hacer nada para ayudarlo",scores:{cuidador:3,inocente:1}},
-    {text:"Quedarme estancado, sin poder crear ni innovar",scores:{creador:3,explorador:1}},
-    {text:"Perder el control, la autoridad o el respeto que he construido",scores:{rey:3,heroe:1}},
-    {text:"Descubrir que lo que construí es superficial o sin significado real",scores:{sabio:3,mago:1}}]},
-  {category:"Promesa de valor",text:"¿Cuál es tu promesa más genuina a tus clientes?",options:[
-    {text:"Que estarán en buenas manos: cuidados, protegidos, acompañados",scores:{cuidador:3,comun:1}},
-    {text:"Que algo en ellos habrá cambiado para siempre",scores:{mago:3,heroe:1}},
-    {text:"Que tendrán claridad, estructura y resultados concretos",scores:{rey:3,sabio:1}},
-    {text:"Que explorarán posibilidades que nunca habían imaginado",scores:{creador:3,explorador:1}}]},
-  {category:"Comunicación de marca",text:"¿Cómo te sientes más cómodo comunicando tu valor?",options:[
-    {text:"Compartiendo historias reales de personas que he transformado",scores:{cuidador:3,heroe:1}},
-    {text:"Mostrando lo que he creado: libros, métodos, ideas originales",scores:{creador:3,sabio:1}},
-    {text:"Proyectando autoridad, trayectoria y resultados demostrados",scores:{rey:3,heroe:1}},
-    {text:"Articulando mi visión del futuro con convicción y pasión",scores:{mago:3,explorador:1}}]},
-  {category:"Relación con clientes",text:"¿Cómo describes tu relación ideal con quienes trabajan contigo?",options:[
-    {text:"Como un mentor que acompaña con calidez genuina",scores:{cuidador:3,sabio:1}},
-    {text:"Como un socio que co-crea soluciones innovadoras",scores:{creador:3,comun:1}},
-    {text:"Como su referente de autoridad y confianza total",scores:{rey:3,sabio:1}},
-    {text:"Como un catalizador que despierta su mayor potencial",scores:{mago:3,heroe:1}}]},
-  {category:"Criterio de decisión",text:"Ante una decisión compleja, ¿qué pesa más en tu razonamiento?",options:[
-    {text:"El impacto humano: cómo afectará a las personas involucradas",scores:{cuidador:3,comun:1}},
-    {text:"La originalidad de la solución y su potencial transformador",scores:{creador:3,mago:1}},
-    {text:"Que sea la decisión correcta y sostenible a largo plazo",scores:{rey:3,sabio:1}},
-    {text:"Que genere el mayor aprendizaje y crecimiento posible",scores:{explorador:3,sabio:1}}]},
-  {category:"Diferenciación",text:"¿En qué aspecto sientes que eres genuinamente diferente?",options:[
-    {text:"En la profundidad con la que me importa el bienestar de otros",scores:{cuidador:3,inocente:1}},
-    {text:"En mi capacidad de ver y crear lo que otros no imaginan",scores:{creador:3,mago:1}},
-    {text:"En la fortaleza de mi carácter y la claridad de mi visión de liderazgo",scores:{rey:3,heroe:1}},
-    {text:"En el rigor de mi conocimiento y la profundidad de mi análisis",scores:{sabio:3,rey:1}}]},
-  {category:"Audiencia ideal",text:"¿Con quién conectas más naturalmente?",options:[
-    {text:"Con personas en momentos de vulnerabilidad que buscan apoyo",scores:{cuidador:3,comun:1}},
-    {text:"Con mentes inquietas que quieren crear e innovar",scores:{creador:3,rebelde:1}},
-    {text:"Con líderes y empresarios que buscan resultados de alto impacto",scores:{rey:3,heroe:1}},
-    {text:"Con personas curiosas que quieren entender la profundidad de las cosas",scores:{sabio:3,explorador:1}}]},
-  {category:"Contenido preferido",text:"¿Qué tipo de contenido disfrutas más crear?",options:[
-    {text:"Historias emotivas e inspiradoras de transformación humana",scores:{cuidador:2,mago:2}},
-    {text:"Análisis profundos, investigación y perspectivas no convencionales",scores:{sabio:3,creador:1}},
-    {text:"Frameworks, metodologías y sistemas prácticos aplicables",scores:{rey:2,sabio:2}},
-    {text:"Ideas disruptivas, innovación y visiones del futuro",scores:{creador:2,mago:2}}]},
-  {category:"Legado",text:"¿Qué quieres que digan de ti en 20 años?",options:[
-    {text:"Que cambió la vida de miles de personas con generosidad y amor",scores:{cuidador:3,inocente:1}},
-    {text:"Que creó algo que ningún otro había imaginado antes",scores:{creador:3,mago:1}},
-    {text:"Que construyó instituciones y sistemas que perduran en el tiempo",scores:{rey:3,sabio:1}},
-    {text:"Que combinó humanismo y tecnología para transformar su industria",scores:{mago:2,creador:2}}]},
-  {category:"Actitud ante el cambio",text:"Cuando el mundo a tu alrededor cambia radicalmente, tu primera reacción es…",options:[
-    {text:"Asegurarme de que las personas a mi alrededor estén bien y orientadas",scores:{cuidador:3,rey:1}},
-    {text:"Explorar las nuevas posibilidades que ese cambio abre",scores:{explorador:3,creador:1}},
-    {text:"Analizar el cambio en profundidad antes de actuar",scores:{sabio:3,rey:1}},
-    {text:"Liderar la adaptación con decisión y claridad para mi equipo",scores:{rey:2,heroe:2}}]}
-];
-
 let scores={},currentQ=0,answers=[];
 
 function initScores(){scores={};Object.keys(ARCHETYPES).forEach(k=>scores[k]=0);}
@@ -799,7 +529,6 @@ function showScreen(id){
   document.getElementById(id).classList.add('active');
 }
 
-// Check URL params on load
 window.addEventListener('load',()=>{
   const params=new URLSearchParams(window.location.search);
   const p=params.get('p');
@@ -880,7 +609,6 @@ function showResultDirect(primary,secondary){
   document.getElementById('result-personality').textContent=arc.personality;
   document.getElementById('result-strategy').textContent=arc.strategy;
 
-  // Grid
   const grid=document.getElementById('result-grid');
   grid.innerHTML='';
   [{title:'Objetivo',items:[arc.objective]},{title:'Metas',items:arc.metas},
@@ -893,14 +621,12 @@ function showResultDirect(primary,secondary){
     grid.appendChild(card);
   });
 
-  // Traits
   const traitsEl=document.getElementById('result-traits');
   traitsEl.innerHTML='';
   arc.keywords.forEach(k=>{
     const tag=document.createElement('span');tag.className='trait-tag';tag.textContent=k;traitsEl.appendChild(tag);
   });
 
-  // Palette
   const paletteRow=document.getElementById('palette-row');
   const paletteHex=document.getElementById('palette-hex');
   paletteRow.innerHTML='';paletteHex.innerHTML='';
@@ -909,7 +635,6 @@ function showResultDirect(primary,secondary){
     const h=document.createElement('span');h.textContent=hex;paletteHex.appendChild(h);
   });
 
-  // Fonts
   const fontsEl=document.getElementById('result-fonts');
   fontsEl.innerHTML='';
   arc.fonts.forEach(f=>{
@@ -918,7 +643,6 @@ function showResultDirect(primary,secondary){
     fontsEl.appendChild(row);
   });
 
-  // Brands
   const brandsEl=document.getElementById('result-brands');
   brandsEl.innerHTML='';
   arc.brands.forEach(b=>{
@@ -929,12 +653,10 @@ function showResultDirect(primary,secondary){
     brandsEl.appendChild(tag);
   });
 
-  // Build share URL
   const base=window.location.href.split('?')[0];
   const shareUrl=base+'?p='+primary+'&s='+secondary;
   document.getElementById('share-url').textContent=shareUrl;
 
-  // Tide
   document.getElementById('result-tide').style.background=arc.color;
   showScreen('result-screen');
   document.getElementById('result-screen').scrollTop=0;
@@ -1004,7 +726,7 @@ async function downloadPDF(){
     const imgData=canvas.toDataURL('image/jpeg',0.92);
     const { jsPDF }=window.jspdf;
 
-    const pdfWidth=210; // A4 mm
+    const pdfWidth=210;
     const pageHeight=297;
     const imgWidth=pdfWidth;
     const imgHeight=(canvas.height*imgWidth)/canvas.width;

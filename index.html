@@ -737,9 +737,9 @@ async function downloadPDF(){
     pdfDoc.style.cssText='position:fixed;left:-9999px;top:0;width:794px;background:#FFFFFF;font-family:Inter,sans-serif;color:#1A1A1A;padding:56px 64px;';
 
     let html='';
-    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;border-bottom:1px solid #E5E5E0;padding-bottom:28px;">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;border-bottom:2px solid #572C80;padding-bottom:24px;">';
     html+='<img src="'+logoSrc+'" style="height:64px;width:auto;">';
-    html+='<div style="text-align:right;font-size:10px;color:#888880;letter-spacing:0.08em;text-transform:uppercase;">Test de Arquetipo de Marca</div>';
+    html+='<div style="text-align:right;font-size:10px;color:#572C80;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;">Test de Arquetipo de Marca</div>';
     html+='</div>';
 
     html+='<div style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#888880;margin-bottom:10px;">Tu arquetipo dominante</div>';
@@ -801,9 +801,9 @@ async function downloadPDF(){
     brands.forEach(b=>{html+='<span style="font-size:11px;color:#444440;border:1px solid #DDDDD5;padding:5px 14px;border-radius:1px;">'+b+'</span>';});
     html+='</div></div>';
 
-    html+='<div style="border-top:1px solid #E5E5E0;padding-top:22px;text-align:center;">';
-    html+='<div style="font-size:11px;color:#888880;margin-bottom:4px;">Dr. Miguel Ávila · Estratega de marca</div>';
-    html+='<div style="font-size:11px;color:#888880;">www.drmiguelavila.com &nbsp;·&nbsp; WhatsApp +52 777 163 9759</div>';
+    html+='<div style="border-top:2px solid #572C80;padding-top:20px;text-align:center;">';
+    html+='<div style="font-size:11px;color:#1A1A1A;font-weight:600;margin-bottom:4px;">Dr. Miguel Ávila · Estratega de marca</div>';
+    html+='<div style="font-size:11px;color:#572C80;">www.drmiguelavila.com &nbsp;·&nbsp; WhatsApp +52 777 163 9759</div>';
     html+='</div>';
 
     pdfDoc.innerHTML=html;
